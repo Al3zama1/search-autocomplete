@@ -1,1 +1,11 @@
-
+spring:
+  application:
+    name: Search Autocomplete
+  datasource:
+    url: jdbc:postgresql://localhost:5432/job_repository
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  batch:
+    jdbc:
+      initialize-schema: always
