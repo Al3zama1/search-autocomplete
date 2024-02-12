@@ -1,11 +1,30 @@
 spring:
   application:
-    name: Search Autocomplete
-  datasource:
-    url: jdbc:postgresql://localhost:5432/job_repository
-    username: user
-    password: password
-    driver-class-name: org.postgresql.Driver
+    name: Search Autocomplete System
+  data:
+    mongodb:
+      port: 27017
+      username: user
+      password: password
+      database: aggregated_query_logs
+      host: localhost
+      authentication-database: admin
+  #  datasource:
+#    url: jdbc:postgresql://localhost:5432/job_repository
+#    username: user
+#    password: password
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    properties:
+#      hibernate:
+#        jdbc:
+#          time_zone: UTC
+  #    type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      maximum-pool-size: 10
+
   batch:
     jdbc:
       initialize-schema: always
+    job:
+      enabled: true

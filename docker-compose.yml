@@ -3,7 +3,7 @@ version: '3.1'
 services:
   batch_db:
     container_name: job_repository
-    image: postgres:15.1
+    image: postgres:16-alpine
     restart: always
     ports:
       - "5432:5432"
@@ -11,4 +11,16 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
       POSTGRES_DB: job_repository
+      TZ: "UTC"
+  mongo_db:
+    container_name: aggregated_logs_db
+    image: mongo:6.0
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: aggregated_logs
+
 
