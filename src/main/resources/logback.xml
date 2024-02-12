@@ -1,0 +1,23 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+    <logger name="org.springframework.web" level="DEBUG"/>
+
+    <!-- File Appender -->
+    <appender name="query-file-appender" class="ch.qos.logback.core.FileAppender">
+        <file>./query-logs/user-queries.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg,%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Logger for QueryFilter with INFO level -->
+    <logger name="com.abranlezama.searchautocomplete.query.filter.QueryFilter" level="info">
+        <appender-ref ref="query-file-appender" />
+    </logger>
+
+</configuration>
