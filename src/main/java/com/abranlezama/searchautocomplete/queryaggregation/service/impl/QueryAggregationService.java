@@ -29,13 +29,16 @@ public class QueryAggregationService implements IQueryAggregationService {
         if (queryRecordOptional.isEmpty()) {
             queryRecord = new QueryRecord();
             queryRecord.setQuery(queryLog.getQuery());
+            queryRecord.setTotalQueries(1);
             queryRecord.getWeeklyEntries().add(new WeeklyEntry(1, startOfWeekDate));
         } else {
             queryRecord = queryRecordOptional.get();
             weeklyEntry = queryRecord.getWeeklyEntries().getLast();
+            queryRecord.setTotalQueries(queryRecord.getTotalQueries() + 1);
 
             if (startOfWeekDate.equals(weeklyEntry.getWeekOf())) {
                 weeklyEntry.setQueryCount(weeklyEntry.getQueryCount() + 1);
+
             } else {
                 queryRecord.getWeeklyEntries().add(new WeeklyEntry(1, startOfWeekDate));
             }
