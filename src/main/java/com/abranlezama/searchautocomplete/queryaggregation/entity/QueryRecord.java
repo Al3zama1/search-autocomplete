@@ -19,6 +19,7 @@ public class QueryRecord {
     @Id
     private String id;
     private String query;
+    private int totalQueries;
     private List<WeeklyEntry> weeklyEntries = new ArrayList<>();
 
 }
