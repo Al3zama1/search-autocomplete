@@ -4,7 +4,7 @@ import com.abranlezama.searchautocomplete.queryaggregation.entity.QueryRecord;
 import com.abranlezama.searchautocomplete.queryaggregation.entity.WeeklyEntry;
 import com.abranlezama.searchautocomplete.queryaggregation.repository.QueryAggregationRepository;
 import com.mongodb.client.result.UpdateResult;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,9 +16,14 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class QueryAggregationMongoImpl implements QueryAggregationRepository {
-    private final MongoTemplate mongoTemplate;
+
+    private final MongoTemplate querydbMongoTemplate;
+
+    public QueryAggregationMongoImpl(@Qualifier("querydbMongoTemplate") MongoTemplate querydbMongoTemplate) {
+        this.querydbMongoTemplate = querydbMongoTemplate;
+    }
 
     @Override
     public QueryRecord updateExistingQueryWeeklyEntry(String query, LocalDate weekOf) {
@@ -31,7 +36,7 @@ public class QueryAggregationMongoImpl implements QueryAggregationRepository {
         Query dbQuery = new Query(criteria);
         dbQuery.fields().include("query", "totalQueries");
 
-        return mongoTemplate.findAndModify(
+        return querydbMongoTemplate.findAndModify(
                 dbQuery,
                 update,
                 FindAndModifyOptions.options().returnNew(true),
@@ -47,7 +52,7 @@ public class QueryAggregationMongoImpl implements QueryAggregationRepository {
         dbQuery.fields().include("query");
 
 
-        return Optional.ofNullable(mongoTemplate.findOne(dbQuery, QueryRecord.class));
+        return Optional.ofNullable(querydbMongoTemplate.findOne(dbQuery, QueryRecord.class));
     }
 
     @Override
@@ -59,7 +64,7 @@ public class QueryAggregationMongoImpl implements QueryAggregationRepository {
 
         Query dbQuery = new Query(criteria);
 
-        return mongoTemplate.updateFirst(
+        return querydbMongoTemplate.updateFirst(
                 dbQuery,
                 update,
                 QueryRecord.class
@@ -68,6 +73,6 @@ public class QueryAggregationMongoImpl implements QueryAggregationRepository {
 
     @Override
     public QueryRecord saveQueryRecord(QueryRecord queryRecord) {
-        return mongoTemplate.insert(queryRecord);
+        return querydbMongoTemplate.insert(queryRecord);
     }
 }
