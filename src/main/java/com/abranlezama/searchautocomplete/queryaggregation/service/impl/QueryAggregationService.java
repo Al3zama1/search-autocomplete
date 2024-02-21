@@ -29,7 +29,6 @@ public class QueryAggregationService implements IQueryAggregationService {
         Optional<QueryRecord> queryRecordOptional = queryAggregationRepository.findQueryRecordByQuery(queryLog.getQuery());
 
         if (queryRecordOptional.isPresent()) {
-            // attempt to
             QueryRecord aggregatedLog = queryAggregationRepository.updateExistingQueryWeeklyEntry(queryLog.getQuery(), startOfWeekDate);
 
             if (aggregatedLog == null) {
