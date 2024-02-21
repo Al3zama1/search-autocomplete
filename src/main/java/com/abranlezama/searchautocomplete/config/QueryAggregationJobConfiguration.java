@@ -1,14 +1,19 @@
 package com.abranlezama.searchautocomplete.config;
 
 import com.abranlezama.searchautocomplete.queryaggregation.dto.QueryLogDTO;
+import com.abranlezama.searchautocomplete.trie.service.ITrieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +28,7 @@ public class QueryAggregationJobConfiguration {
 
     private final ItemReader<QueryLogDTO> queryLogReader;
     private final ItemWriter<QueryLogDTO> queryLogWriter;
+    private final ITrieService trieService;
 
 
     @Bean
@@ -35,9 +41,26 @@ public class QueryAggregationJobConfiguration {
     }
 
     @Bean
+    public Step buildTrie(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("buildTrie", jobRepository)
+                .tasklet(myTaskLet(), transactionManager)
+                .build();
+    }
+
+//    RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception;
+
+    private Tasklet myTaskLet() {
+        return (StepContribution contribution, ChunkContext chunkContext) -> {
+            trieService.buildTrie();
+            return RepeatStatus.FINISHED;
+        };
+    }
+
+    @Bean
     public Job queryLogAggregationJob(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new JobBuilder("queryLogAggregationJob", jobRepository)
                 .start(aggregateQuery(jobRepository, transactionManager))
+                .next(buildTrie(jobRepository, transactionManager))
                 .build();
     }
 
