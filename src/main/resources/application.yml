@@ -9,6 +9,7 @@ spring:
       database: aggregated_query_logs
       host: localhost
       authentication-database: admin
+      auto-index-creation: true
   #  datasource:
 #    url: jdbc:postgresql://localhost:5432/job_repository
 #    username: user
