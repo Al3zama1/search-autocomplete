@@ -1,15 +1,8 @@
 spring:
   application:
     name: Search Autocomplete System
-  data:
-    mongodb:
-      port: 27017
-      username: user
-      password: password
-      database: aggregated_query_logs
-      host: localhost
-      authentication-database: admin
-      auto-index-creation: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
   #  datasource:
 #    url: jdbc:postgresql://localhost:5432/job_repository
 #    username: user
@@ -29,3 +22,20 @@ spring:
       initialize-schema: always
     job:
       enabled: true
+mongodb:
+  querydb:
+    port: 27017
+    username: user
+    password: password
+    database: aggregated_query_logs
+    host: localhost
+    authentication-database: admin
+    auto-index-creation: true
+  triedb:
+    port: 27017
+    username: user
+    password: password
+    database: trie_db
+    host: localhost
+    authentication-database: admin
+    auto-index-creation: true
