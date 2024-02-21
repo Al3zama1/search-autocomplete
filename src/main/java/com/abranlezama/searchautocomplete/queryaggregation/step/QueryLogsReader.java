@@ -10,8 +10,6 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 @Component
 public class QueryLogsReader extends FlatFileItemReader<QueryLogDTO> {
@@ -39,10 +37,9 @@ public class QueryLogsReader extends FlatFileItemReader<QueryLogDTO> {
         return fieldSet -> {
             QueryLogDTO queryLog = new QueryLogDTO();
             Instant instant = Instant.parse(fieldSet.readString("time"));
-            ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
 
             queryLog.setQuery(fieldSet.readString("query"));
-            queryLog.setTime(zonedDateTime);
+            queryLog.setTime(instant);
 
             return queryLog;
         };
