@@ -46,9 +46,7 @@ public class QueryAggregationJobConfiguration {
                 .tasklet(myTaskLet(), transactionManager)
                 .build();
     }
-
-//    RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception;
-
+    
     private Tasklet myTaskLet() {
         return (StepContribution contribution, ChunkContext chunkContext) -> {
             trieService.buildTrie();
