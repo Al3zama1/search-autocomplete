@@ -1,22 +1,6 @@
 spring:
   application:
     name: Search Autocomplete System
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
-  #  datasource:
-#    url: jdbc:postgresql://localhost:5432/job_repository
-#    username: user
-#    password: password
-#    driver-class-name: org.postgresql.Driver
-#  jpa:
-#    properties:
-#      hibernate:
-#        jdbc:
-#          time_zone: UTC
-  #    type: com.zaxxer.hikari.HikariDataSource
-#    hikari:
-#      maximum-pool-size: 10
-
   batch:
     jdbc:
       initialize-schema: always
