@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Node {
+public class TrieNode {
     private final String prefix;
-    private NodeCache[] cache = new NodeCache[5];
-    private int cacheCount = 0;
+    private List<TrieNodeCache> cache = new ArrayList<>();
     private boolean isEndOfQuery;
     private int frequency = 0;
-    private final Map<String, Node> children = new HashMap<>();
+    private final Map<String, TrieNode> children = new HashMap<>();
 
 
 }

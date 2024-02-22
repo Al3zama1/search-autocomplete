@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Trie {
     @Id
     private String id;
-    private final Node root;
+    private final TrieNode root;
     public Trie() {
-        this.root = new Node(" ");
+        this.root = new TrieNode(" ");
     }
 
 }

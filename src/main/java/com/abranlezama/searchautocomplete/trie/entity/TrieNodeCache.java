@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NodeCache {
+public class TrieNodeCache {
     private String query;
     private int queryCount;
 }
