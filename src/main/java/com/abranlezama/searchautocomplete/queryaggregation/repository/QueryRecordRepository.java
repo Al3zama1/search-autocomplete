@@ -1,21 +1,28 @@
 package com.abranlezama.searchautocomplete.queryaggregation.repository;
 
 import com.abranlezama.searchautocomplete.queryaggregation.entity.QueryRecord;
-import com.abranlezama.searchautocomplete.queryaggregation.entity.WeeklyEntry;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
 public interface QueryRecordRepository extends MongoRepository<QueryRecord, String> {
 
-    Optional<QueryRecord> findQueryRecordByQuery(String query);
 
-    @Query(value = "{ 'query':  ?0 }", fields = "{ 'weeklyEntries': { $slice:  -1 } }")
-    Optional<QueryRecord> findLastWeeklyRecordByQuery(String query);
+    @Query(value = "{ 'query':  ?0 }", fields = "{ 'query':  1}")
+    Optional<QueryRecord> findByQuery(String query);
 
-    @Query(value = "{ '_id' : ?0 }", fields = "{ 'weeklyEntries': 1 }")
-    QueryRecord addWeeklyRecord(String id, WeeklyEntry weeklyEntry);
+    @Query(value = "{ $and: [ { 'query': ?0 }, { 'weeklyEntries.weekOf': ?1 } ] }",
+            fields = "{ 'query': 1, 'totalQueries': 1, 'weeklyEntries.$': 1 }")
+    Optional<QueryRecord> findByQueryAndDate(String query, LocalDate weekOf);
+
+    @Transactional
+    @Query(value = "{ 'query': ?0, 'weeklyEntries.weekOf': ?1 }",
+            fields = "{ '_id': 1, 'weeklyEntries.$': 1 }")
+    Optional<QueryRecord> updateQueryLog(String query, LocalDate weekOf);
+
 }
