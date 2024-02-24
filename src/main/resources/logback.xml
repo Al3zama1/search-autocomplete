@@ -16,7 +16,7 @@
         </encoder>
     </appender>
     <!-- Logger for QueryFilter with INFO level -->
-    <logger name="com.abranlezama.searchautocomplete.query.filter.QueryFilter" level="info">
+    <logger name="com.abranlezama.searchautocomplete.api.query.filter.QueryFilter" level="info">
         <appender-ref ref="query-file-appender" />
     </logger>
 

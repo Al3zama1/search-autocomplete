@@ -34,7 +34,7 @@ public class QueryAggregationJobConfiguration {
     @Bean
     public Step aggregateQuery(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("aggregateQuery", jobRepository)
-                .<QueryLogDTO, QueryLogDTO>chunk(10, transactionManager)
+                .<QueryLogDTO, QueryLogDTO>chunk(50, transactionManager)
                 .reader(queryLogReader)
                 .writer(queryLogWriter)
                 .build();
@@ -46,7 +46,7 @@ public class QueryAggregationJobConfiguration {
                 .tasklet(myTaskLet(), transactionManager)
                 .build();
     }
-    
+
     private Tasklet myTaskLet() {
         return (StepContribution contribution, ChunkContext chunkContext) -> {
             trieService.buildTrie();

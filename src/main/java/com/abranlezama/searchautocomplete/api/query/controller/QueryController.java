@@ -1,6 +1,6 @@
-package com.abranlezama.searchautocomplete.query.controller;
+package com.abranlezama.searchautocomplete.api.query.controller;
 
-import com.abranlezama.searchautocomplete.query.service.IQueryService;
+import com.abranlezama.searchautocomplete.api.query.service.IQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

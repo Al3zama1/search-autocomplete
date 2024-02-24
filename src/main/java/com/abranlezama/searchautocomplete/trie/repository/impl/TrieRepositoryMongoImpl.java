@@ -32,4 +32,13 @@ public class TrieRepositoryMongoImpl implements TrieRepository {
         triedbMongoTemplate.upsert(query, update, QueryPrefix.class);
 
     }
+
+    @Override
+    public QueryPrefix getPrefixSuggestions(String queryPrefix) {
+        Criteria criteria = Criteria.where("queryPrefix").is(queryPrefix);
+
+        Query query = new Query(criteria);
+
+        return triedbMongoTemplate.findOne(query, QueryPrefix.class);
+    }
 }

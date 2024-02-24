@@ -1,4 +1,4 @@
-package com.abranlezama.searchautocomplete.query.filter;
+package com.abranlezama.searchautocomplete.api.query.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

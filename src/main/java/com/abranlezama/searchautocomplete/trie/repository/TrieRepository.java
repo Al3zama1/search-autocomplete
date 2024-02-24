@@ -5,4 +5,6 @@ import com.abranlezama.searchautocomplete.trie.entity.QueryPrefix;
 public interface TrieRepository {
 
     void upsertPrefixRecord(QueryPrefix queryPrefix);
+
+    QueryPrefix getPrefixSuggestions(String prefix);
 }
