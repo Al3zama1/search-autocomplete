@@ -6,6 +6,17 @@ spring:
       initialize-schema: always
     job:
       enabled: true
+  web:
+    resources:
+      add-mappings: false
+server:
+  trace:
+    true
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
 mongodb:
   querydb:
     port: 27017
