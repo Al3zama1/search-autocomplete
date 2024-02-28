@@ -1,6 +1,6 @@
 # Search Autocomplete System
 
-This project implements a scalable search autocomplete system optimized for suggesting top k queries to users in constant time based on the user query input prefix.
+Implemented a scalable search autocomplete system optimized for suggesting top k queries to users in constant time based on the user query input prefix.
 
 ## Overview
 The autocomplete system utilizes a custom Trie (prefix tree) data structure 
