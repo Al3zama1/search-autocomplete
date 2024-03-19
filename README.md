@@ -9,6 +9,15 @@ the Trie dynamically processes the input, enabling real-time query suggestions. 
 and aggregated weekly, ensuring the availability of relevant suggestions for improved search results.
 
 
+## System Design
+Developed application following system design best practices to ensure a reliable system that is able to scale as traffic 
+increases.
+
+### Batch Processing
+User submitted queries are logged and aggregated to permanent storage once per week through the use of **batch processing**.
+
+
+
 ## Technologies
 - Java
 - Spring Boot
