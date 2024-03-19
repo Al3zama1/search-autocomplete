@@ -24,6 +24,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Value("${server.trace:false}")
     private boolean printStackTrace;
 
+
+    @ExceptionHandler(RateLimitException.class)
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    public ResponseEntity<Object> handleTooManyRequestsException(RateLimitException ex, WebRequest request) {
+        return buildErrorResponse(ex, ex.getMessage(), HttpStatus.TOO_MANY_REQUESTS, request);
+    }
+
     @Override
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(

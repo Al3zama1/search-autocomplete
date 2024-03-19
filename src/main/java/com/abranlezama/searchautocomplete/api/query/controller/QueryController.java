@@ -1,6 +1,7 @@
 package com.abranlezama.searchautocomplete.api.query.controller;
 
 import com.abranlezama.searchautocomplete.api.query.service.IQueryService;
+import com.abranlezama.searchautocomplete.api.ratelimit.annotation.RateLimitProtection;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -25,6 +26,7 @@ public class QueryController {
     }
 
     @GetMapping("/suggest")
+    @RateLimitProtection
     public List<String> suggest(@RequestParam String queryPrefix) {
         String key = String.format("query:prefix:%s", queryPrefix);
         List<String> querySuggestions = stringRedisTemplate.opsForList().range(key, 0, -1);
