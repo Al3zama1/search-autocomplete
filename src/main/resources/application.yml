@@ -9,6 +9,15 @@ spring:
   web:
     resources:
       add-mappings: false
+  cache:
+    type: redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  devtools:
+    livereload:
+      enabled: true
 server:
   trace:
     true

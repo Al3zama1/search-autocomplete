@@ -12,6 +12,12 @@ services:
       POSTGRES_USER: user
       POSTGRES_DB: job_repository
       TZ: "UTC"
+  redis:
+    container_name: redis_cache
+    image: redis/redis-stack:7.2.0-v9
+    ports:
+      - "6379:6379"
+      - "8001:8001"
   mongo_db:
     container_name: aggregated_logs_db
     image: mongo:6.0
