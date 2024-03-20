@@ -5,7 +5,7 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      enabled: true
+      enabled: false
   web:
     resources:
       add-mappings: false
