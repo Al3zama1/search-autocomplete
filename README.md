@@ -2,6 +2,8 @@
 
 Implemented a scalable search autocomplete system optimized for suggesting top k queries to users in constant time.
 
+![alt text](./app-demo.gif)
+
 ## System Overview
 
 The system employs a custom Trie (prefix tree) data structure to optimize prefix-based search operations. As users input queries, 
@@ -15,6 +17,8 @@ increases.
 
 ### Batch Processing
 User submitted queries are logged and aggregated to permanent storage once per week through the use of **batch processing**.
+
+
 
 
 
