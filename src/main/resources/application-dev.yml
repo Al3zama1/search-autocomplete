@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: Search Autocomplete System
+  devtools:
+    livereload:
+      enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+mongodb:
+  querydb:
+    port: 27017
+    username: user
+    password: password
+    database: aggregated_query_logs
+    host: localhost
+    authentication-database: admin
+    auto-index-creation: true
+  triedb:
+    port: 27017
+    username: user
+    password: password
+    database: trie_db
+    host: localhost
+    authentication-database: admin
+    auto-index-creation: true

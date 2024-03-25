@@ -1,6 +1,6 @@
 spring:
-  application:
-    name: Search Autocomplete System
+  profiles:
+    active: dev
   batch:
     jdbc:
       initialize-schema: always
@@ -11,13 +11,6 @@ spring:
       add-mappings: false
   cache:
     type: redis
-  data:
-    redis:
-      host: localhost
-      port: 6379
-  devtools:
-    livereload:
-      enabled: true
 server:
   trace:
     true
@@ -26,20 +19,4 @@ server:
     include-binding-errors: always
     include-stacktrace: on_param
     include-exception: false
-mongodb:
-  querydb:
-    port: 27017
-    username: user
-    password: password
-    database: aggregated_query_logs
-    host: localhost
-    authentication-database: admin
-    auto-index-creation: true
-  triedb:
-    port: 27017
-    username: user
-    password: password
-    database: trie_db
-    host: localhost
-    authentication-database: admin
-    auto-index-creation: true
+
