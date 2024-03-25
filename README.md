@@ -32,7 +32,24 @@ rebuilding of the Trie structure used to generate query suggestions, resulting i
 
 ### Trie (Prefix Tree) Structure
 The underlying data structure behind the search autocomplete system is the Trie (prefix tree) data structure.
+Its operations allow for fast insertion and retrieval of queries with a common prefix, effectively satisfying the requirements of the search
+autocomplete system. Query suggestions response time is further improved with the addition of a custom cache mechanism that 
+stores the top five most promising query suggestions.
 
+##### Trie Structure Without Caching Mechanism
+Time complexity: O(p) + O(c) + O(clogc)
+- Find the query prefix: O(p)
+- Traverse the subtree from the prefix node to get all valid children: O(c)
+- Sort the children and get top k queries: O(clogc)
+
+##### Trie Structure With Caching Mechanism
+Time complexity: O(1)
+- Find query prefix: O(1)
+  - Users rarely search long queries, therefore limiting its length helps improve time complexity.
+- The cache mechanism rules out the need to traverse the subtree from the prefix node: O(1)
+- The caching mechanism already contains the top k queries with the given prefix, therefore no sorting is needed: O(1)
+
+![Trie structure](./assets/trie-structure.png)
 
 ## Technologies
 - Java
@@ -41,3 +58,5 @@ The underlying data structure behind the search autocomplete system is the Trie 
 - MongoDB
 - Redis Cache
 - React JS
+- REST API Rate Limiting
+
