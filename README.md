@@ -60,3 +60,22 @@ Time complexity: O(1)
 - React JS
 - REST API Rate Limiting
 
+## Local Project Setup
+
+### Mandatory Requirements
+
+- Java Version 17 or higher
+- Docker Engine and Docker Compose
+- Node JS 
+
+### Optional Requirements
+- Gradle version >= 8.5 (the project includes the Gradle Wrapper to run the project)
+
+
+## Running The Project Locally
+1. Mke sure Docker is running.
+2. Start required infrastructure with ``docker-compose up``.
+3. Run the application ``./gradlew bootRun -Dspring.profiles.active=dev``.
+4. Run to the application web client with ``npm run dev`` in the "search-autocomplete-client" directory.
+5. Open your browser and navigate to ``http://localhost:5173/`` to interact with the application.
+
